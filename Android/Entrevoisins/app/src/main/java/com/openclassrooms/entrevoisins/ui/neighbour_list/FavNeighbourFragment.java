@@ -1,6 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -11,31 +12,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.callback.OnClickNeighbourListener;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourFromFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+import com.openclassrooms.entrevoisins.ui.neighbour_details.NeighbourDetailsActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-public class FavNeighbourFragment extends Fragment{
+public class FavNeighbourFragment extends Fragment implements OnClickNeighbourListener {
     private NeighbourApiService mApiService;
-    private List<Neighbour> mFavNeighbours;
     private RecyclerView mRecyclerView;
-
+    private List<Neighbour> favNeighbours;
 
     /**
      * Create and return a new instance
      * @return @{@link FavNeighbourFragment}
      */
     public static FavNeighbourFragment newInstance() {
-        FavNeighbourFragment fragment = new FavNeighbourFragment();
-        return fragment;
+        return new FavNeighbourFragment();
     }
 
     @Override
@@ -59,8 +58,8 @@ public class FavNeighbourFragment extends Fragment{
      * Init the List of neighbours
      */
     private void initList() {
-        mFavNeighbours = mApiService.getFavNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbours));
+       favNeighbours = mApiService.getFavNeighbours();
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(favNeighbours, this));
     }
 
     @Override
@@ -89,5 +88,14 @@ public class FavNeighbourFragment extends Fragment{
     public void onDeleteNeighbourFromFav(DeleteNeighbourFromFavEvent event) {
         mApiService.deleteNeighbourFromFav(event.neighbour);
         initList();
+    }
+
+    @Override
+    public void onNeighbourClick(int position) {
+        Intent playerDetailsIntent = new Intent(getContext(), NeighbourDetailsActivity.class);
+
+
+        playerDetailsIntent.putExtra("Neighbour",favNeighbours.get( position));
+        startActivity(playerDetailsIntent);
     }
 }

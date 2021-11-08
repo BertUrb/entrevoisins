@@ -8,8 +8,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_account.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_delete_white_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_person_add_white_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_star_border_white_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_star_white_24dp.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/ic_star_yellow_24.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/drawable/round_button.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/activity_add_neighbour.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/activity_list_neighbour.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/activity_neighbour_details.xml" value="0.1" />
         <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/fragment_list_neighbour.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/fragment_neighbour.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Bertrand/OpenClassrooms/Android/Entrevoisins/app/src/main/res/layout/fragment_neighbour_list.xml" value="0.13020833333333334" />

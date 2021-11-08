@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.callback.OnClickNeighbourListener;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourFromFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
@@ -27,17 +28,19 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private final OnClickNeighbourListener onClickNeighbourListener;
 
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, OnClickNeighbourListener onClickNeighbourListener) {
         mNeighbours = items;
+        this.onClickNeighbourListener = onClickNeighbourListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onClickNeighbourListener);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
         @BindView(R.id.item_list_name)
@@ -79,10 +82,21 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
 
+        private final OnClickNeighbourListener mOnClickNeighbourListener;
 
-        public ViewHolder(View view) {
+
+        public ViewHolder(View view, OnClickNeighbourListener onClickNeighbourListener) {
             super(view);
+            mOnClickNeighbourListener = onClickNeighbourListener;
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mOnClickNeighbourListener.onNeighbourClick(getAdapterPosition());
+
+
         }
     }
 }

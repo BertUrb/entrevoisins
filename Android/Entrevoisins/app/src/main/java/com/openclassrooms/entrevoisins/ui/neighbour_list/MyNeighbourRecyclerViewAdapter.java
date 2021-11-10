@@ -1,8 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.callback.OnClickNeighbourListener;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourFromFavEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
@@ -52,20 +49,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ViewPager vp = v.getRootView().findViewById(R.id.container);
-                if (vp.getCurrentItem() == 0) {
-                    EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-                    Log.d("TAG", "onClick: DELETE NEIGHBOUR");
-                } else {
-                    EventBus.getDefault().post(new DeleteNeighbourFromFavEvent(neighbour));
-                    Log.d("TAG", "onClick: DELETE FAV");
-                }
+        holder.mDeleteButton.setOnClickListener(v -> {
+            EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+           
 
 
-            }
+
         });
     }
 
@@ -75,14 +64,13 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final OnClickNeighbourListener mOnClickNeighbourListener;
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
         @BindView(R.id.item_list_name)
         public TextView mNeighbourName;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
-
-        private final OnClickNeighbourListener mOnClickNeighbourListener;
 
 
         public ViewHolder(View view, OnClickNeighbourListener onClickNeighbourListener) {

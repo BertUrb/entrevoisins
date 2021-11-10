@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnPageChange;
 
 public class NeighbourDetailsActivity extends AppCompatActivity {
 
@@ -51,8 +54,8 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         if(mNeighbour.getFav())
         {
             mFavButton.setImageResource(R.drawable.ic_star_border_yellow_24);
-            mNeighbour.setFav(false);
             mApiService.deleteNeighbourFromFav(mNeighbour);
+            mNeighbour.setFav(false);
         }
         else {
             mFavButton.setImageResource(R.drawable.ic_star_yellow_24);
@@ -62,6 +65,16 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,4 +117,5 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         mSite.setText(site);
 
     }
+
 }

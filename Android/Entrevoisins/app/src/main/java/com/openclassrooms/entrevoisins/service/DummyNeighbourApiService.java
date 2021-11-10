@@ -38,16 +38,16 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
      */
     @Override
     public List<Neighbour> getFavNeighbours() {
-        List<Neighbour> favneighbours = new ArrayList<>();
+        List<Neighbour> favNeighbours = new ArrayList<>();
 
         for(Neighbour neighbour : neighbours)
         {
             if(neighbour.getFav())
             {
-                favneighbours.add(neighbour);
+                favNeighbours.add(neighbour);
             }
         }
-        return favneighbours;
+        return favNeighbours;
     }
 
     /**
@@ -56,8 +56,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     @Override
     public void deleteNeighbour(Neighbour neighbour) {
         neighbours.remove(neighbour);
-
-        Log.d("TAG", "deleteNeighbour: DELETE Neighbour");
     }
 
     /**
@@ -67,6 +65,8 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     public void deleteNeighbourFromFav(Neighbour neighbour) {
 
         neighbours.get(neighbours.indexOf(neighbour)).setFav(false);
+
+
 
     }
 

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.callback.OnClickNeighbourListener;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteFavoriteEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -43,13 +44,11 @@ public class NeighbourFragment extends Fragment implements OnClickNeighbourListe
      */
     public static NeighbourFragment newInstance(int position) {
         NeighbourFragment fragment = new NeighbourFragment();
-
         fragment.setFavoriteList(position);
         return fragment;
     }
 
-    private void setFavoriteList( int position)
-    {
+    private void setFavoriteList(int position) {
         mFav = position;
     }
 
@@ -57,7 +56,6 @@ public class NeighbourFragment extends Fragment implements OnClickNeighbourListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
-
     }
 
     @Override
@@ -76,16 +74,13 @@ public class NeighbourFragment extends Fragment implements OnClickNeighbourListe
      * Init the List of neighbours
      */
     private void initList() {
-        if(mFav == 1)
-        {
+        if (mFav == 1) {
             neighbours = mApiService.getFavNeighbours();
 
-        }
-        else {
+        } else {
             neighbours = mApiService.getNeighbours();
         }
-
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(neighbours, this));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(neighbours, mFav == 1, this));
     }
 
     @Override
@@ -113,26 +108,20 @@ public class NeighbourFragment extends Fragment implements OnClickNeighbourListe
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        if(mFav == 0) {
-            mApiService.deleteNeighbour(event.neighbour);
-        }
-        else {
-            mApiService.deleteNeighbourFromFav(event.neighbour);
-        }
-
+        mApiService.deleteNeighbour(event.neighbour);
         initList();
+    }
 
+    @Subscribe
+    public void onDeleteFavorite(DeleteFavoriteEvent event) {
+        mApiService.deleteNeighbourFromFav(event.neighbour);
+        initList();
     }
 
     @Override
     public void onNeighbourClick(int position) {
         Intent playerDetailsIntent = new Intent(getContext(), NeighbourDetailsActivity.class);
-
-
         playerDetailsIntent.putExtra("Neighbour", neighbours.get(position));
         startActivity(playerDetailsIntent);
-
     }
-
-
 }

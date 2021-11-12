@@ -11,19 +11,13 @@ import java.util.List;
 /**
  * Dummy mock for the Api
  */
-public class DummyNeighbourApiService implements  NeighbourApiService {
+public class DummyNeighbourApiService implements NeighbourApiService {
 
     private List<Neighbour> neighbours;
 
-
     public DummyNeighbourApiService() {
         neighbours = DummyNeighbourGenerator.generateNeighbours();
-
-
-
-
     }
-
 
     /**
      * {@inheritDoc}
@@ -39,11 +33,8 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     @Override
     public List<Neighbour> getFavNeighbours() {
         List<Neighbour> favNeighbours = new ArrayList<>();
-
-        for(Neighbour neighbour : neighbours)
-        {
-            if(neighbour.getFav())
-            {
+        for (Neighbour neighbour : neighbours) {
+            if (neighbour.getFav()) {
                 favNeighbours.add(neighbour);
             }
         }
@@ -63,15 +54,12 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
      */
     @Override
     public void deleteNeighbourFromFav(Neighbour neighbour) {
-
         neighbours.get(neighbours.indexOf(neighbour)).setFav(false);
-
-
-
     }
 
     /**
      * {@inheritDoc}
+     *
      * @param neighbour
      */
     @Override
@@ -84,9 +72,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
      */
     @Override
     public void addFavNeighbour(Neighbour neighbour) {
-       int index = neighbours.indexOf(neighbour);
+        int index = neighbours.indexOf(neighbour);
         neighbours.get(index).setFav(true);
-
     }
-
 }

@@ -50,19 +50,16 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @OnClick(R.id.fav_button)
     void ToggleFavNeighbour()
     {
-
         if(mNeighbour.getFav())
         {
             mFavButton.setImageResource(R.drawable.ic_star_border_yellow_24);
             mApiService.deleteNeighbourFromFav(mNeighbour);
-            mNeighbour.setFav(false);
         }
         else {
             mFavButton.setImageResource(R.drawable.ic_star_yellow_24);
             mApiService.addFavNeighbour(mNeighbour);
-            mNeighbour.setFav(true);
-
         }
+        mNeighbour.setFav(!mNeighbour.getFav());
     }
 
     @Override
@@ -82,17 +79,10 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mApiService = DI.getNeighbourApiService();
 
-
-
-
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
         Intent intent = getIntent();
         mNeighbour = intent.getParcelableExtra("Neighbour");
-
-
-
-
 
         if(mNeighbour.getFav())
         {
@@ -102,20 +92,15 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
             mFavButton.setImageResource(R.drawable.ic_star_border_yellow_24);
         }
 
-
         mNeighbourName.setText(mNeighbour.getName());
-
         Glide.with(this)
                 .load(mNeighbour.getAvatarUrl())
                 .into(mNeighbourImage);
-
         mPhone.setText(mNeighbour.getPhoneNumber());
         mAbouteMe.setText(mNeighbour.getAboutMe());
         mNeighbourName2.setText(mNeighbour.getName());
         mAddress.setText(mNeighbour.getAddress());
         String site = "https://facebook.com/" + mNeighbour.getName();
         mSite.setText(site);
-
     }
-
 }

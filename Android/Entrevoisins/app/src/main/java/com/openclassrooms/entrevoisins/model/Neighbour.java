@@ -10,29 +10,49 @@ import java.util.Objects;
  */
 public class Neighbour implements Parcelable {
 
-    /** Identifier */
+    public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {
+        @Override
+        public Neighbour createFromParcel(Parcel in) {
+            return new Neighbour(in);
+        }
+
+        @Override
+        public Neighbour[] newArray(int size) {
+            return new Neighbour[size];
+        }
+    };
+    /**
+     * Identifier
+     */
     private long id;
-
-    /** Full name */
+    /**
+     * Full name
+     */
     private String name;
-
-    /** Avatar */
+    /**
+     * Avatar
+     */
     private String avatarUrl;
-
-    /** Adress */
+    /**
+     * Adress
+     */
     private String address;
-
-    /** Phone number */
+    /**
+     * Phone number
+     */
     private String phoneNumber;
-
-    /** About me */
+    /**
+     * About me
+     */
     private String aboutMe;
-
-    /** Faved */
+    /**
+     * Faved
+     */
     private boolean fav = false;
 
     /**
      * Constructor
+     *
      * @param id
      * @param name
      * @param avatarUrl
@@ -46,6 +66,8 @@ public class Neighbour implements Parcelable {
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
     }
+
+
     public Neighbour(long id, String name, String avatarUrl, String address,
                      String phoneNumber, String aboutMe, boolean fav) {
         this.id = id;
@@ -57,7 +79,6 @@ public class Neighbour implements Parcelable {
         this.fav = fav;
     }
 
-
     protected Neighbour(Parcel in) {
         id = in.readLong();
         name = in.readString();
@@ -68,28 +89,15 @@ public class Neighbour implements Parcelable {
         fav = in.readByte() != 0;
     }
 
-    public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {
-        @Override
-        public Neighbour createFromParcel(Parcel in) {
-            return new Neighbour(in);
-        }
-
-        @Override
-        public Neighbour[] newArray(int size) {
-            return new Neighbour[size];
-        }
-    };
-
-    public boolean getFav()
-    {
+    public boolean getFav() {
         return fav;
     }
 
-    public void setFav(boolean fav)
-    {
+    public void setFav(boolean fav) {
         this.fav = fav;
 
     }
+
     public long getId() {
         return id;
     }

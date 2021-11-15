@@ -1,10 +1,8 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_details;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,16 +12,13 @@ import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
-import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnPageChange;
 
 public class NeighbourDetailsActivity extends AppCompatActivity {
 
@@ -48,14 +43,11 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     private NeighbourApiService mApiService;
 
     @OnClick(R.id.fav_button)
-    void ToggleFavNeighbour()
-    {
-        if(mNeighbour.getFav())
-        {
+    void ToggleFavNeighbour() {
+        if (mNeighbour.getFav()) {
             mFavButton.setImageResource(R.drawable.ic_star_border_yellow_24);
             mApiService.deleteNeighbourFromFav(mNeighbour);
-        }
-        else {
+        } else {
             mFavButton.setImageResource(R.drawable.ic_star_yellow_24);
             mApiService.addFavNeighbour(mNeighbour);
         }
@@ -72,6 +64,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +77,9 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mNeighbour = intent.getParcelableExtra("Neighbour");
 
-        if(mNeighbour.getFav())
-        {
+        if (mNeighbour.getFav()) {
             mFavButton.setImageResource(R.drawable.ic_star_yellow_24);
-        }
-        else {
+        } else {
             mFavButton.setImageResource(R.drawable.ic_star_border_yellow_24);
         }
 

@@ -14,6 +14,7 @@ public class DeleteFavoriteEvent {
 
     /**
      * Constructor.
+     *
      * @param neighbour
      */
     public DeleteFavoriteEvent(Neighbour neighbour) {

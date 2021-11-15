@@ -51,7 +51,7 @@ public class NeighbourServiceTest {
 
     @Test
     public void addFavNeighbourWithSuccess() {
-        Neighbour neighbourToFav= service.getNeighbours().get(6);
+        Neighbour neighbourToFav = service.getNeighbours().get(6);
         assertFalse(service.getFavNeighbours().contains(neighbourToFav));
         service.addFavNeighbour(neighbourToFav);
         assertTrue(service.getFavNeighbours().contains(neighbourToFav));

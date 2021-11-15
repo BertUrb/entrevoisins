@@ -78,7 +78,7 @@ public class NeighboursListTest {
     public void myNeighboursFavList_deleteAction_shouldRemoveItem() {
         // First scroll to the Favorites Tab.
         onView(withId(R.id.container)).perform(ViewPagerActions.scrollToPage(1));
-        // Given : We remove the element at position 2
+        // Check if only the 5 favorites are displayed
         onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT));
         // When perform a click on a delete icon
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))

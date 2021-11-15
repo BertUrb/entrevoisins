@@ -34,7 +34,7 @@ public class Neighbour implements Parcelable {
      */
     private String avatarUrl;
     /**
-     * Adress
+     * Address
      */
     private String address;
     /**
@@ -53,9 +53,9 @@ public class Neighbour implements Parcelable {
     /**
      * Constructor
      *
-     * @param id
-     * @param name
-     * @param avatarUrl
+     * @param id        id of neighbour
+     * @param name      Name of neighbour
+     * @param avatarUrl Url of neighbour avatar
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
                      String phoneNumber, String aboutMe) {
@@ -67,7 +67,17 @@ public class Neighbour implements Parcelable {
         this.aboutMe = aboutMe;
     }
 
-
+    /**
+     * Overcharged Constructor
+     *
+     * @param id          id of neighbour
+     * @param name        name of neighbour
+     * @param avatarUrl   avatar URL of neighbour
+     * @param address     address of neighbour
+     * @param phoneNumber phone number of neighbour
+     * @param aboutMe     About the neighbour
+     * @param fav         if true, neighbour is in the favorites tab
+     */
     public Neighbour(long id, String name, String avatarUrl, String address,
                      String phoneNumber, String aboutMe, boolean fav) {
         this.id = id;

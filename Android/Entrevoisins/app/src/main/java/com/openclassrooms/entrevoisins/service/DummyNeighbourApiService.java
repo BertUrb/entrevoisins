@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DummyNeighbourApiService implements NeighbourApiService {
 
-    private List<Neighbour> neighbours;
+    private final List<Neighbour> neighbours;
 
     public DummyNeighbourApiService() {
         neighbours = DummyNeighbourGenerator.generateNeighbours();

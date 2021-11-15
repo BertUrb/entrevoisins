@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
     private final OnClickNeighbourListener onClickNeighbourListener;
-    private boolean isFavorite;
+    private final boolean isFavorite;
 
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, boolean isFavorite, OnClickNeighbourListener onClickNeighbourListener) {
@@ -36,6 +37,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         this.isFavorite = isFavorite;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -66,7 +68,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final OnClickNeighbourListener mOnClickNeighbourListener;
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;

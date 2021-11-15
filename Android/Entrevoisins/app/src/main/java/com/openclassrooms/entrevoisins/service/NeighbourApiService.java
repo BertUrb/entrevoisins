@@ -28,28 +28,28 @@ public interface NeighbourApiService {
     /**
      * Deletes a neighbour
      *
-     * @param neighbour
+     * @param neighbour Neighbour to delete
      */
     void deleteNeighbour(Neighbour neighbour);
 
     /**
      * Deletes a neighbour from fav
      *
-     * @param neighbour
+     * @param neighbour Neighbour to delete from fav
      */
     void deleteNeighbourFromFav(Neighbour neighbour);
 
     /**
      * Create a neighbour
      *
-     * @param neighbour
+     * @param neighbour Neighbour to créate
      */
     void createNeighbour(Neighbour neighbour);
 
     /**
      * Add a neighbour to fav
      *
-     * @param neighbour
+     * @param neighbour Neighbour to fav
      */
     void addFavNeighbour(Neighbour neighbour);
 

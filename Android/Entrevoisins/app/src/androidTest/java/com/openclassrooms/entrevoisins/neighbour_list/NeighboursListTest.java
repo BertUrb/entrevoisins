@@ -103,15 +103,11 @@ public class NeighboursListTest {
         //Click on element at position 8
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(7,click()));
-
         // Click on star
         onView(withId(R.id.fav_button)).perform(click());
         // Store neighbour name
-        String neighbourName = onView(withId(R.id.neighbour_name)).toString();
         pressBack();
         onView(withId(R.id.container)).perform(ViewPagerActions.scrollToPage(1));
-
-
         // Check if the FAV_ITEMS_COUNT +1 favorites are displayed
         onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT +1));
         // When perform a click on a delete icon
@@ -119,6 +115,5 @@ public class NeighboursListTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is FAV_ITEMS_COUNT
         onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT));
-
     }
 }

@@ -1,7 +1,9 @@
 package com.openclassrooms.entrevoisins.neighbour_list;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeTextIntoFocusedView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
@@ -9,13 +11,16 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
+
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+import android.support.annotation.RequiresPermission;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.contrib.ViewPagerActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
@@ -71,21 +76,7 @@ public class NeighboursListTest {
         onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(ITEMS_COUNT - 1));
     }
 
-    /**
-     * When we delete an item from favorites, the item is no more shown
-     */
-    @Test
-    public void myNeighboursFavList_deleteAction_shouldRemoveItem() {
-        // First scroll to the Favorites Tab.
-        onView(withId(R.id.container)).perform(ViewPagerActions.scrollToPage(1));
-        // Check if only the 5 favorites are displayed
-        onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT));
-        // When perform a click on a delete icon
-        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element is 4
-        onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT - 1));
-    }
+
 
     /**
      * When we click on an item, details screen should be shown, also checks if the good name is Displayed
@@ -100,5 +91,34 @@ public class NeighboursListTest {
         onView(withId(R.id.details_scroll_view)).check(matches(isDisplayed()));
         // Check the name
         onView(withId(R.id.neighbour_name)).check(matches(withText("Jack")));
+
+    }
+
+    /**
+     * When we click on the star, neighbour should appear in fav list
+     * When cick on delete, number of items decreases
+     */
+    @Test
+    public void myNeighbourList_starClick_andDeleteFromFav(){
+        //Click on element at position 8
+        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(7,click()));
+
+        // Click on star
+        onView(withId(R.id.fav_button)).perform(click());
+        // Store neighbour name
+        String neighbourName = onView(withId(R.id.neighbour_name)).toString();
+        pressBack();
+        onView(withId(R.id.container)).perform(ViewPagerActions.scrollToPage(1));
+
+
+        // Check if the FAV_ITEMS_COUNT +1 favorites are displayed
+        onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT +1));
+        // When perform a click on a delete icon
+        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+        // Then : the number of element is FAV_ITEMS_COUNT
+        onView(allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(FAV_ITEMS_COUNT));
+
     }
 }

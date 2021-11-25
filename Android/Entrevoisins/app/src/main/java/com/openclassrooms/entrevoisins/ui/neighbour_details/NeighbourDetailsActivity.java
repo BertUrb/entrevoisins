@@ -72,6 +72,15 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setTitle(null);
+
+        initNeighbour();
+    }
+
+    /**
+     * Init Neighbour
+     */
+    private void initNeighbour()
+    {
         Intent intent = getIntent();
         mNeighbour = intent.getParcelableExtra("Neighbour");
 

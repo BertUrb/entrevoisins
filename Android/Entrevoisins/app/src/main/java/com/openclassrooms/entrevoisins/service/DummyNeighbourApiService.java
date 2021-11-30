@@ -69,7 +69,6 @@ public class DummyNeighbourApiService implements NeighbourApiService {
      */
     @Override
     public void addFavNeighbour(Neighbour neighbour) {
-        int index = neighbours.indexOf(neighbour);
-        neighbours.get(index).setFav(true);
+        neighbours.get(neighbours.indexOf(neighbour)).setFav(true);
     }
 }

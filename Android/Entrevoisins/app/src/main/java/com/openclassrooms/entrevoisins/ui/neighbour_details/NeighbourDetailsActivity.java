@@ -37,7 +37,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @BindView(R.id.neighbour_phone)
     TextView mPhone;
     @BindView(R.id.aboutMe)
-    TextView mAbouteMe;
+    TextView mAboutMe;
 
     private Neighbour mNeighbour;
     private NeighbourApiService mApiService;
@@ -95,7 +95,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
                 .load(mNeighbour.getAvatarUrl())
                 .into(mNeighbourImage);
         mPhone.setText(mNeighbour.getPhoneNumber());
-        mAbouteMe.setText(mNeighbour.getAboutMe());
+        mAboutMe.setText(mNeighbour.getAboutMe());
         mNeighbourName2.setText(mNeighbour.getName());
         mAddress.setText(mNeighbour.getAddress());
         String site = "https://facebook.com/" + mNeighbour.getName();

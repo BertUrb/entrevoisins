@@ -104,7 +104,6 @@ public class NeighboursListTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(7,click()));
         // Click on star
         onView(withId(R.id.fav_button)).perform(click());
-        // Store neighbour name
         pressBack();
         onView(withId(R.id.container)).perform(ViewPagerActions.scrollToPage(1));
         // Check if the FAV_ITEMS_COUNT +1 favorites are displayed
